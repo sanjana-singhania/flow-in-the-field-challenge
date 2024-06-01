@@ -19,8 +19,19 @@ public class RestAPI {
     HttpResponse<String> response = client.send(getRequest, HttpResponse.BodyHandlers.ofString());
 
     Reader reader = new StringReader(response.body());
+    System.out.println(response.body());
     Gson gson = new Gson();
     DataBank data = gson.fromJson(reader, DataBank.class);
+
+    ParticipantStatistics test = new ParticipantStatistics(data.getParticipantInfo().get(0), data);
+
+    String res = gson.toJson(test);
+    //System.out.println(res);
+
+
+    HttpRequest postRequest = HttpRequest.newBuilder().uri(URI.create(uniqueURL))
+            .header("Content-Type", "application/json")
+            .POST(HttpRequest.BodyPublishers.ofString(res)).build();
 
   }
 }

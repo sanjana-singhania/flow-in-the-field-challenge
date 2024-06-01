@@ -13,7 +13,19 @@ public class Round {
     this.endTime = endTime;
   }
 
+  public Integer getRoundId() {
+    return this.roundId;
+  }
+
   public Integer getSessionId() {
-    return sessionId;
+    return this.sessionId;
+  }
+
+  public Integer getScore() {
+    return score;
+  }
+
+  public Long getDuration() {
+    return endTime - startTime;
   }
 }

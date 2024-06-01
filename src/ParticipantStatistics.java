@@ -1,5 +1,3 @@
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 public class ParticipantStatistics {
@@ -9,25 +7,20 @@ public class ParticipantStatistics {
   Double averageRoundScore;
   Double averageSessionDuration;
 
-  public ParticipantStatistics(Integer id, String name, List<LanguageStatistics> languages,
-                               Double averageRoundScore, Double averageSessionDuration) {
-    this.id = id;
-    this.name = name;
-    this.languages = languages;
-    this.averageRoundScore = averageRoundScore;
-    this.averageSessionDuration = averageSessionDuration;
+  public ParticipantStatistics(Participant participant, DataBank data) {
+    Utils u = new Utils();
+    this.id = participant.getParticipantId();
+    this.name = participant.getName();
+    this.languages = u.createLanguageStatistics(participant.getAllRounds(data),
+            participant.getAllSessions(data));
+    this.averageRoundScore = u.getAverageRoundScore(participant.getAllRounds(data).values());
+    this.averageSessionDuration = u.getAverageSessionDuration(
+            participant.getAllSessions(data).values());
   }
 
-  public List<LanguageStatistics> createLanguageStatistics(List<Round> myRounds,
-                                                           List<Session> mySessions) {
-    ArrayList<LanguageStatistics> res = new ArrayList<>();
-    HashMap<String, List<Round>> roundsPerLang = new HashMap<>();
-    for (Session s : mySessions) {
-      roundsPerLang.computeIfAbsent(s.getLanguage(),
-              k -> new ArrayList<Round>()).addAll(s.getAssociatedRounds(myRounds));
-    }
+  public String getName() {
+    return this.name;
   }
-
 
 
 }

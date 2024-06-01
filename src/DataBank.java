@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.List;
 
 public class DataBank {
@@ -18,5 +19,20 @@ public class DataBank {
       }
     }
     throw new IllegalArgumentException("No session found with id: " + sessionId);
+  }
+
+  public List<Session> getSessions() {
+    List<Session> res = new ArrayList<>(this.sessions);
+    return res;
+  }
+
+  public List<Round> getRounds() {
+    List<Round> res = new ArrayList<>(this.rounds);
+    return res;
+  }
+
+  public List<Participant> getParticipantInfo() {
+    List<Participant> res = new ArrayList<>(this.participantInfo);
+    return res;
   }
 }

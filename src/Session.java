@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 public class Session {
@@ -27,7 +28,7 @@ public class Session {
     return language;
   }
 
-  public List<Round> getAssociatedRounds(List<Round> allRounds) {
+  public List<Round> getAssociatedRounds(Collection<Round> allRounds) {
     ArrayList<Round> res = new ArrayList<>();
     for (Round r : allRounds) {
       if (r.getSessionId().equals(this.getSessionId())) {
@@ -36,4 +37,17 @@ public class Session {
     }
     return res;
   }
+
+  public Integer getTotalScore(Collection<Round> allRounds) {
+    int res = 0;
+    for (Round r : this.getAssociatedRounds(allRounds)) {
+      res += r.getScore();
+    }
+    return res;
+  }
+
+  public Long getDuration() {
+    return endTime - startTime;
+  }
+
 }
