@@ -1,5 +1,6 @@
 ## README
 
+This was a project as part of the application process for Sandbox. 
 To run this solution, navigate to the RestAPI class, and run the main method.
 
 #### Thought Process:
